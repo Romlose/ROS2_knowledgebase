@@ -6,7 +6,7 @@ find_package(std_msgs REQUIRED)
 
 #set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fsanitize=thread -g")
 
-add_executable(pub src/third_lesson.cpp)
+add_executable(pub src/third_lesson_2.cpp)
 
 ament_target_dependencies(pub
   rclcpp
