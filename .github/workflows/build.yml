@@ -9,7 +9,7 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-    container: osrf/ros:jazzy-desktop 
+    container: osrf/ros:jazzy-desktop
 
     steps:
       - uses: actions/checkout@v4
@@ -23,5 +23,3 @@ jobs:
           . /opt/ros/jazzy/setup.sh
           colcon build --packages-select ros2_course --cmake-clean-cache --event-handlers console_direct+
           echo "Сборка прошла успешно!"
-          . install/setup.sh
-          echo "Пакет установлен"
