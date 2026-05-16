@@ -58,3 +58,5 @@ docker compose logs -f
 #с логами и параметрами запуска. Нужно это для анализа после завершения процесса
 docker compose down --remove-orphans
 ```
+
+# Lesson 3 

@@ -2,8 +2,8 @@ services:
     container1:
         build: 
             #Указываем context (откуда искать файлы) и указываем явно Dockerfile
-            context: .
-            dockerfile: Dockerfile1
+            context: ../../ 
+            dockerfile: ./docker/second_lesson/Dockerfile1
         container_name: ros2_gpu_node
         #Здесь также можно указать переменные окружения при запуске, ровно как и в Dockerfile
         environment:
@@ -14,12 +14,13 @@ services:
             - NVIDIA_DRIVER_CAPABILITIES=all
         #Пробрасываем директории в контейнер
         volumes:
-            - ./src:/ros2_ws/src:rw
+            #- ./src:/ros2_ws/src:rw
             # а вот это нужно для работы DISPLAY
             - /tmp/.X11-unix:/tmp/.X11-unix:rw
         #разрешаем пользоваться сетью, портами основной машины
         network_mode: host 
-
+        tty: true
+        stdin_open: true
         # ПРОБРОС GPU
         deploy:
             resources:
@@ -28,14 +29,17 @@ services:
                         - driver: nvidia
                           capabilities: [gpu]
 
-        #Запускаем что по кайфу
-        command: ros2 run publisher pub
+        #Запускаем что по кайфу, именно через bash -c "..", чтобы подтянулись переменные окружения
+        # и правильно сурсился .bashrc
+        command: bash -c "ros2 run ros2_course pub"
     container2:
         build: 
             #Указываем context (откуда искать файлы) и указываем явно Dockerfile
-            context: .
-            dockerfile: Dockerfile2
+            context: ../../ 
+            dockerfile: ./docker/second_lesson/Dockerfile2
         container_name: ros2_example
         environment:
             - ROS_DOMAIN_ID=10
-        command: ros2 run teleop_twist_keyboard teleop_twist_keyboard
+        tty: true
+        stdin_open: true
+        command: bash -c "ros2 run teleop_twist_keyboard teleop_twist_keyboard"

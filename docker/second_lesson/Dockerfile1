@@ -1,13 +1,22 @@
 FROM ros:humble-ros-base
 
-# Копируем скрипт точки входа
-COPY entry_point2.sh /entry_point2.sh
+WORKDIR /ros2_ws
 
+RUN apt-get update && apt-get upgrade -y \
+    ros-${ROS_DISTRO}-rmw-cyclonedds-cpp \
+    python3-colcon-common-extensions && \
+    rm -rf /var/lib/apt/lists/*
+#Копируем и собираем проект 
+#смотри context docker-compose, там мы явно указали путь, иначе нельзя писать ../../ прям в Dockerfile
+COPY . /ros2_ws/src
+RUN bash -c "source /opt/ros/humble/setup.bash && colcon build"
+# Копируем скрипт точки входа
+COPY ./docker/second_lesson/entry_point1.sh /entry_point1.sh
 # Даем права на выполнение
-RUN chmod +x /entry_point2.sh
+RUN chmod +x /entry_point1.sh
 
 # Указываем точку входа
-ENTRYPOINT ["/entry_point2.sh"]
+ENTRYPOINT ["/entry_point1.sh"]
 
 # Команда по умолчанию, если в docker-compose не указана другая
 CMD ["bash"]

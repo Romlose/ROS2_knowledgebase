@@ -2,9 +2,7 @@
 set -e
 
 # 1. Подключаем базовое окружение ROS 2, записываем в bashrc и сурсим его
-cat >> ~/.bashrc "source /opt/ros/${ROS_DISTRO}/setup.bash"
-cat >> ~/.bashrc "source install/setup.bash"
-source ~/.bashrc
+source /opt/ros/humble/setup.bash
 
 # 2. Подключаем наше рабочее пространство (если оно было собрано в Dockerfile)
 # Проверяем наличие файла, чтобы контейнер не упал, если мы собираем на лету

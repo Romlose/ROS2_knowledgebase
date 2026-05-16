@@ -1,7 +1,12 @@
 FROM ros:humble-ros-base
 
+ENV ROS_DISTRO=humble
+WORKDIR /ros2_ws
+
+RUN apt-get update && apt-get install -y ros-humble-teleop-twist-keyboard
+
 # Копируем скрипт точки входа
-COPY entry_point2.sh /entry_point2.sh
+COPY ./docker/second_lesson/entry_point2.sh /entry_point2.sh
 
 # Даем права на выполнение
 RUN chmod +x /entry_point2.sh
