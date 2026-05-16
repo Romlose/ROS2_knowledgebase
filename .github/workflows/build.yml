@@ -1,0 +1,25 @@
+name: ROS2 Build Check
+
+on:
+  push:
+    branches: [ feature/opencv-cvbridge ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    container: osrf/ros:jazzy-desktop
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install dependencies
+        run: |
+          apt-get update && apt-get install -y ros-jazzy-cv-bridge ros-jazzy-image-transport
+
+      - name: Build package
+        run: |
+          . /opt/ros/jazzy/setup.sh
+          colcon build --packages-select ros2_course --cmake-clean-cache --event-handlers console_direct+
+          echo "Сборка прошла успешно!"
