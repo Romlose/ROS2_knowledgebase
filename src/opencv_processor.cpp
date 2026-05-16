@@ -8,7 +8,7 @@
 #include <sensor_msgs/msg/image.hpp>
 
 // cv_bridge - библиотека для работы между ROS-картинкой и OpenCV
-#include <cv_bridge/cv_bridge.h>
+#include <cv_bridge/cv_bridge.hpp>
 // image_transport умеет публиковать сжатые изображения
 #include <image_transport/image_transport.hpp>
 
