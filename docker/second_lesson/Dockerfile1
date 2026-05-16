@@ -1,0 +1,13 @@
+FROM ros:humble-ros-base
+
+# Копируем скрипт точки входа
+COPY entry_point2.sh /entry_point2.sh
+
+# Даем права на выполнение
+RUN chmod +x /entry_point2.sh
+
+# Указываем точку входа
+ENTRYPOINT ["/entry_point2.sh"]
+
+# Команда по умолчанию, если в docker-compose не указана другая
+CMD ["bash"]
