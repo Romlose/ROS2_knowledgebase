@@ -60,3 +60,17 @@ docker compose down --remove-orphans
 ```
 
 # Lesson 3 
+Теперь давайте взглянем сколько весят контейнеры, довольно прилично для запуска лишь дефолтного управления с клавиатуры и кастомного но легкого publisher
+```bash
+docker ps -as
+CONTAINER ID   IMAGE                      COMMAND                  CREATED         STATUS         PORTS     NAMES           SIZE
+37c0a70ae708   second_lesson-container2   "/entry_point2.sh ba…"   8 seconds ago   Up 7 seconds             ros2_example    616kB (virtual 842MB)
+b43a71ff529b   second_lesson-container1   "/entry_point1.sh ba…"   8 seconds ago   Up 7 seconds             ros2_gpu_node   296kB (virtual 1.82GB)
+```
+На самом деле, можно и нужно оптимизировать размер контейнеров. Делается это при помощи build-образов, созданных специально, чтобы блидлить work_spaces там и затем запускать их в основном контейнере.
+Посмотрите Dockerfile и убедитесь что сборка теперь занимает меньше, гораздо меньше
+```bash
+docker ps -as
+CONTAINER ID   IMAGE                                COMMAND                  CREATED              STATUS              PORTS     NAMES                                  SIZE
+f4dd1cc80004   third_lesson-lightweight_container   "/ros_entrypoint.sh …"   About a minute ago   Up About a minute             third_lesson-lightweight_container-1   255kB (virtual 432MB)
+```

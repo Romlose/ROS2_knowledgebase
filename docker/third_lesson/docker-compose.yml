@@ -1,0 +1,15 @@
+services:
+    lightweight_container:
+        build:
+            context: .
+            dockerfile: ./docker/Dockerfile
+        environment:
+            - ROS_DOMAIN_ID=10
+            - DISPLAY=${DISPLAY}
+        network_mode: host
+        tty: true
+        stdin_open: true
+        command: bash -c "ros2 run ros2_course wait_set_keyboard" #не заработает потому что
+                                                                  #контейнер специфически обрабатывает нажатия
+                                                                  #клавиш клавиатуры и через С я не могу считать их
+        

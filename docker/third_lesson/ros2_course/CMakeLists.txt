@@ -37,8 +37,8 @@ ament_target_dependencies(fourth rclcpp std_msgs sensor_msgs)
 install(TARGETS fourth DESTINATION lib/${PROJECT_NAME})
 
 # --- OPENCV_GROUP ---
-add_executable(opencv_processor src/opencv_processor.cpp)
-ament_target_dependencies(opencv_processor rclcpp sensor_msgs cv_bridge image_transport)
-install(TARGETS opencv_processor DESTINATION lib/${PROJECT_NAME})
+#add_executable(opencv_processor src/opencv_processor.cpp)
+#ament_target_dependencies(opencv_processor rclcpp sensor_msgs cv_bridge image_transport)
+#install(TARGETS opencv_processor DESTINATION lib/${PROJECT_NAME})
 
 ament_package()
